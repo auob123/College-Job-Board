@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load is_job_already_applied %}
+{% load is_job_already_saved %}
+{% block content %}
+{% load get_total_applicant %}
+
+<!-- HOME -->
+<section class="section-hero overlay inner-page bg-image"
+         style="background-image:url('{% static 'images/bgimg2.jpg' %}');" id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">{{ job.title }}</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'Job:home' %}">Home</a> <span class="mx-2 slash">/</span>
+          <a href="{% url 'Job:job-list' %}">Job</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>{{ job.title }}</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="site-section">
+  <div class="container">
+    {% include 'messages.html' %}
+
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="d-flex align-items-center">
+          <div class="border p-4 d-inline-block mr-4 pr-2 rounded">
+            <img src="{% static 'images/job-desc.png' %}" alt="Image">
+          </div>
+          <div class="p-2 m-2">
+            <h1>{{ job.title }}</h1>
+            <div>
+              <span class="ml-2 mb-2"><i class="bi bi-briefcase-fill"></i><span style="padding-left:6px;">{{ job.org_name }}</span></span>
+              <span class="m-2"><i class="bi bi-geo-alt-fill"></i>{{ job.campus.name }}</span>
+              <span class="m-2"><i class="bi bi-hourglass-bottom"></i>
+                <span class="text-primary">
+
+                  {% if job.job_type == '1' %}
+                  Full Time
+                  {% elif job.job_type == '2'%}
+                  Part Time
+                  {% elif job.job_type == '3'%}
+                  Internship
+                  {% else  %}
+                  Mentoring
+                  {% endif %}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="row">
+          <div class="col-5">
+            {% if user.is_authenticated and user.role == 'student' %}
+            {% is_job_already_saved job request.user as is_saved %}
+            {% if is_saved %}
+            <span href="#" class="btn btn-md" style="background-color:#E37383;height:52px;width:140px;"><svg fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="35px"><path d="M 12.8125 2 C 12.335938 2.089844 11.992188 2.511719 12 3 L 12 47 C 11.996094 47.359375 12.1875 47.691406 12.496094 47.871094 C 12.804688 48.054688 13.1875 48.054688 13.5 47.875 L 25 41.15625 L 36.5 47.875 C 36.8125 48.054688 37.195313 48.054688 37.503906 47.871094 C 37.8125 47.691406 38.003906 47.359375 38 47 L 38 3 C 38 2.449219 37.550781 2 37 2 L 13 2 C 12.96875 2 12.9375 2 12.90625 2 C 12.875 2 12.84375 2 12.8125 2 Z M 14 4 L 36 4 L 36 45.25 L 25.5 39.125 C 25.191406 38.945313 24.808594 38.945313 24.5 39.125 L 14 45.25 Z"/></svg>Saved</span>
+            {% else %}
+
+            <form action="{% url 'Job:bookmark-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+              <input type="submit" class="btn btn-block btn-secondary btn-md" style="height:52px;width:140px;" value="Save Job" />
+            </form>
+
+            {% endif %}
+
+            {% elif user.role == 'faculty' %}
+            <button onclick="call_sw_alert_func('{% url 'Job:del-job' job.id %}','{{ job.id }}','Once Deleted, You will not be able to recover this post!')" class="btn btn-block btn-danger btn-md" style="height:52px;width:140px;"><i class="bi bi-trash3"></i></button>
+
+            {% else %}
+
+            <form action="{% url 'Job:bookmark-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+              <input type="submit" class="btn btn-block btn-secondary btn-lg" style="height:52px;width:160px" value="Save" />
+            </form> 
+
+            {% endif %}
+
+          </div>
+
+          <div class="col-7">
+            {% if user.is_authenticated and user.role == 'student' %}
+            {% is_job_already_applied job request.user as is_applied %}
+            {% if is_applied %}
+
+            <span  class="btn btn-block btn-danger btn-md">Already Applied</span>
+
+            {% else %}
+
+            <form action="{% url 'Job:apply-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+
+              <input type="submit" class="btn btn-block btn-primary btn-md" value="Apply Now" />
+            </form>
+            {% endif %}
+
+            {% elif user.role == 'faculty' %}
+
+            <a href="{% url 'Job:edit-job' job.id %}" class="btn btn-block btn-light btn-md" style="height:52px;width:160px">Edit&nbsp;<i class="bi bi-pen"></i></a>
+            {% else %}
+            <form action="{% url 'Job:apply-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+
+              <input type="submit" class="btn btn-block btn-primary btn-md" style="height:52px;width:160px" value="Apply Now" />
+            </form>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="mb-5">
+          <!-- <figure class="mb-5"><img src="images/job_single_img_1.jpg" alt="Image" class="img-fluid rounded"></figure> -->
+          <h2 class="h5 d-flex align-items-center mb-4 text-primary">
+            <img src= "{%static 'images/job-desc-icon.png' %}">
+            Job Description
+          </h2>
+          {% if job.prerequisites.names %}
+          Course Prerequisites :
+          <ul>
+            {% for course in job.prerequisites.names %}
+            <li>{{course}}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {{ job.description | safe }}
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-6">
+
+            {% if user.is_authenticated and user.role == 'student' %}
+            {% is_job_already_saved job request.user as is_saved %}
+            {% if is_saved %}
+            <span class="btn btn-block btn-md" style="background-color:#E37383;height:52px;width:160px;">Already Saved</span>
+            {% else %}
+
+            <form action="{% url 'Job:bookmark-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+              <input type="submit" class="btn btn-block btn-secondary btn-md" style="height:52px;width:160px;" value="Save" />
+
+            </form>
+
+            {% endif %}
+
+            {% elif user.role == 'faculty' %}
+
+            <button onclick="location.href='{% url 'Job:applicants' job.id %}'" class="btn btn-block btn-success btn-md" style="color: white">
+                View Applicants
+            </button>
+            {% else %}
+
+            <form action="{% url 'Job:bookmark-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+
+              <input type="submit" class="btn btn-block btn-secondary btn-md" style="height:52px;width:160px;" value="Save" />
+            </form> 
+
+            {% endif %}
+          </div>
+          {% if user.is_authenticated and  user.role == 'student' %}
+          {% is_job_already_applied job request.user as is_applied %}
+          {% if is_applied %}
+            <div class="col-6">
+                <span class="btn btn-block btn-secondary btn-md" style="height:52px;width:160px;">Already Applied</span>
+            </div>
+          {% else %}
+            <div class="col-6">
+                <form action="{% url 'Job:apply-job' job.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="job" value="{{ job.id }}">
+
+                <input type="submit" class="btn btn-block btn-primary btn-md" style="height:52px;width:160px;" value="Apply Now" />
+                </form>
+            </div>
+          {% endif %}
+
+          {% elif user.role == 'faculty' %}
+
+          <div class="col-6">
+            <a href="{% url 'Job:edit-job' job.id %}" class="btn btn-block btn-light btn-md" style="height:52px;width:160px;">Edit&nbsp;<i class="bi bi-pen"></i></a>
+          </div>
+
+          {% else %}
+          <div class="col-6">
+            <form action="{% url 'Job:apply-job' job.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="job" value="{{ job.id }}">
+
+              <input type="submit" class="btn btn-block btn-primary btn-md" style="height:52px;width:160px;" value="Apply Now" />
+            </form>
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+      <div class="col-lg-4">
+        <div class="bg-light p-3 border rounded mb-4">
+          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+          <ul class="list-unstyled pl-3 mb-0">
+            <li class="mb-2"><strong class="text-black">Published on:</strong> {{ job.timestamp|date:"d M Y" }}</li>
+            <li class="mb-2"><strong class="text-black">Employment Status:</strong>
+              {% if job.job_type == '1' %}
+              Full Time
+              {% elif job.job_type == '2'%}
+              Part Time
+              {% elif job.job_type == '3'%}
+              Internship
+              {% else  %}
+              Mentoring
+              {% endif %}
+            </li>
+            <li class="mb-2"><strong class="text-black">Job Location:</strong> {{ job.campus.name }}</li>
+            <li class="mb-2"><strong class="text-black">Salary (in INR):</strong> {{ job.salary }}</li>
+            <li class="mb-2"><strong class="text-black">Application Deadline:</strong> {{ job.last_date|date:"d M Y" }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-light p-3 border rounded">
+          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
+          <div class="px-3">
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><i class="bi bi-facebook"></i>&nbsp;</a>
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><i class="bi bi-linkedin"></i>&nbsp;</a>
+            <a href="#" class="pt-3 pb-3 pr-3 pl-0"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+
+<script src="{% static 'js/sweet-alert.js' %}"></script>
+<script src="{% static 'js/sweet-alert-ajax.js' %}"></script>
+
+{% endblock %}

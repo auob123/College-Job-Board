@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load get_total_applicant %}
+{% block content %}
+
+<section class="section-hero overlay inner-page bg-image"
+         style="background-image: url('{% static 'images/bgimg.jpg' %}');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Dashboard</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="{% url 'Job:home' %}">Home</a> <span class="mx-2 slash">/</span>
+                    <a href="{% url 'Job:job-list' %}">Job</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Dashboard</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-5">
+                {% include 'messages.html' %}
+
+                <div class="card">
+                    {% if user.role == "faculty" %}
+                    <h5 class="card-header text-center">ALL JOBS</h5>
+                    {% if jobs %}
+                    <table class="table text-center mt-5">
+                        <thead class="thead-dark" style="background-color:#1686ba;">
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Posted Date</th>
+                            <th>Date expiring</th>
+                            <th>Status</th>
+                            <th>Applicants</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for job in jobs %}
+                        <tr id="row_{{ job.id }}">
+                            <td><a href="{% url 'Job:single-job' job.id %}" style="text-decoration: none;">{{ job.title }}</a></td>
+                            <td>{{ job.timestamp | date:'M d, Y'  }}</td>
+                            <td>{{ job.last_date | date:'M d, Y' }}</td>
+                            <td>
+                                {% if job.is_published == True %}
+
+                                <span class="badge alert-info">Published</span>
+
+                                {% else %}
+
+                                <span class="badge alert-danger px-2">Pending</span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {% get_total_applicant total_applicants job as is_applicant %}
+
+                                {% if is_applicant %}
+                                <a href="{% url 'Job:applicants' job.id %}">
+                                    <i class="fa fa-users"></i>
+                                    <span class="badge alert-success">
+
+                                       
+                                            {% if is_applicant > 1 %}
+                                            {% get_total_applicant total_applicants job %} Applicants
+                                            {% else %}
+                                            {% get_total_applicant total_applicants job %} Applicant
+                                            {% endif %}
+
+                                        </span>
+
+                                </a>
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                <a class="btn btn-info btn-sm" href="{% url 'Job:edit-job' job.id %}"
+                                   role="button">Edit</a>
+                                {% if job.is_published == True %}
+                                {% if job.is_closed == False %}
+                                <span id="change_job_status_{{ job.id }}">
+                                            <button onclick="confirm('Once closed, your job post will be marked as completed !');" class="text-white btn btn-success btn-sm" >Close</button>
+                                        </span>
+                                {% else %}
+                                <a class="text-white btn btn-success btn-sm"
+                                   role="button">Closed</a>
+                                {% endif %}
+                                {% endif %}
+                                <button onclick="confirm('Are you sure you want to delete this ?');" class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p class="m-5">You have not posted any job yet ! <a href="{% url 'Job:create-job' %}">Create a new one.</a></p>
+                    {% endif %}
+
+                    {% elif user.role == "student" %}
+
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Bookmarked Jobs</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Applied Jobs</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <h5 class="card-header text-center">Bookmarked Posts</h5>
+                            {% if saved_jobs %}
+                            <table class="table text-center mt-5">
+                                <thead class="thead-dark" style="background-color:#1686ba;">
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Date Posted</th>
+                                    <th>Date Expiring</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for job in saved_jobs %}
+                                    <tr id="row_{{ job.id }}">
+                                        <td><a href="{% url 'Job:single-job' job.job.id %}" style="text-decoration:none;">{{ job.job.title }}</a></td>
+                                        <td>{{ job.timestamp | date:'M d, Y'  }}</td>
+                                        <td>{{ job.job.last_date | date:'M d, Y' }}</td>
+                                        <td>
+                                            <button onclick="return confirm('Are you sure you want to delete this ?');" class="btn btn-danger btn-sm">Delete</button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <p class="m-5">You have not any saved any job post yet !! </p>
+                            {% endif %}
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <h5 class="card-header text-center">Applied Job Posts</h5>
+                            {% if applied_jobs %}
+                            <table class="table text-center mt-5" >
+                                <thead class="thead-dark" style="background-color:#1686ba;">
+                                    <tr>
+                                        <th>Job Title</th>
+                                        <th>Date Posted</th>
+                                        <th>Date Expiring</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for job in applied_jobs %}
+                                    <tr id="row_{{ job.id }}">
+                                        <td><a href="{% url 'Job:single-job' job.job.id %}" style="text-decoration: none;">{{ job.job.title }}</a></td>
+                                        <td>{{ job.timestamp | date:'M d, Y'  }}</td>
+                                        <td>{{ job.job.last_date | date:'M d, Y' }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                                <p class="m-5">You have not applied to any job yet !! </p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/sweet-alert.js' %}"></script>
+<script src="{% static 'js/sweet-alert-ajax.js' %}"></script>
+{% endblock %}
