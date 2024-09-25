@@ -454,6 +454,8 @@ def job_edit(request, id=id):
     return render(request, 'Job/job-edit.html', context)
 
 
+
+#mark the strings that need translation
 def home(request):
     message = _("Jobs Listed")  # Marking text for translation
     return render(request, 'home.html', {'message': message})
