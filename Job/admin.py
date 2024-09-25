@@ -3,3 +3,17 @@ from .models import *
 
 admin.site.register(Campus)
 
+
+
+class ApplicantAdmin(admin.ModelAdmin):
+    list_display = ('job', 'user', 'timestamp')
+
+
+admin.site.register(Applicant, ApplicantAdmin)
+
+
+class JobAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_published', 'is_closed', 'timestamp')
+
+
+admin.site.register(Job, JobAdmin)
