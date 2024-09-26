@@ -130,6 +130,8 @@ USE_I18N = True
 USE_TZ = True
 USE_L10N = True
 DEFAULT_CHARSET = 'utf-8'
+SITE_ID = 1
+
 
 LANGUAGES = [
 
