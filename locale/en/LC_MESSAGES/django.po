@@ -22,6 +22,10 @@ msgstr ""
 msgid "home/"
 msgstr ""
 
+msgid "Register"
+msgstr "Register"
+msgid "Log In"
+msgstr "Log In"
 #: .\Job\urls.py:60 .\collegegig\urls.py:29
 msgid "about/"
 msgstr ""

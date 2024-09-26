@@ -459,3 +459,10 @@ def job_edit(request, id=id):
 def home(request):
     message = _("Jobs Listed")  # Marking text for translation
     return render(request, 'home.html', {'message': message})
+
+
+#mark the strings that need translation
+def base(request):
+    message = _("Register")  # Marking text for translation
+    message = _("Log In")
+    return render(request, 'base.html', {'message': message})

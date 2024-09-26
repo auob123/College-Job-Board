@@ -23,6 +23,12 @@ msgstr ""
 msgid "home/"
 msgstr ""
 
+
+msgid "Register"
+msgstr "التسجيل"
+
+msgid "Log In"
+msgstr "الدخول"
 #: .\Job\urls.py:60 .\collegegig\urls.py:29
 msgid "about/"
 msgstr ""

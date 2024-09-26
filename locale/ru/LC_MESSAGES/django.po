@@ -31,6 +31,8 @@ msgstr ""
 #: .\Job\views.py:458 .\templates\Job\home.html:27
 msgid "Jobs Listed"
 msgstr "все"
+msgid "Log In"
+msgstr "Войти"
 
 #: .\env\lib\python3.8\site-packages\ckeditor_uploader\forms.py:6
 msgid "Search files"
