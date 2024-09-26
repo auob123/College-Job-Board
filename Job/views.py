@@ -465,4 +465,28 @@ def home(request):
 def base(request):
     message = _("Register")  # Marking text for translation
     message = _("Log In")
+    message = _("Faculty")
+    message = _("Student")
+    message = _("Switch")
     return render(request, 'base.html', {'message': message})
+
+def footer(request):
+    message = _("Details")  # Marking text for translation
+    message = _("For any suggestions/queries please contact us through following details:  ")
+    message = _("Contact No.")
+    message = _("Useful Links")
+    message = _("Other Links")
+    return render(request, 'footer.html', {'message': message})
+
+
+def search(request):
+    message = _("Select Campus")  # Marking text for translation
+    message = _("Full Time")
+    message = _("Part Time")
+    message = _("Internship")
+    message = _("Mentoring")
+    message = _("Search Job")
+    message = _("Search for the job")
+    
+    return render(request, 'search.html', {'message': message})
+

@@ -79,8 +79,8 @@
                         <li class="pr-3 has-children">
                           <a>{% trans "Register" %}<i class="bi bi-caret-down-fill"></i></a>
                           <ul class="dropdown">
-                            <li><a href="{% url 'Account:faculty-registration' %}">Faculty</a></li>
-                            <li><a href="{% url 'Account:student-registration' %}">Student</a></li>
+                            <li><a href="{% url 'Account:faculty-registration' %}">{% trans "Faculty" %}</a></li>
+                            <li><a href="{% url 'Account:student-registration' %}">{% trans "Student" %}</a></li>
                           </ul>
                         </li>
                         
@@ -104,7 +104,7 @@
                               </option>
                           {% endfor %}
                       </select>
-                      <input type="submit" value="Switch">
+                      <input type="submit" value="{% trans 'Switch' %}">
                   </form>
                   
                   

@@ -1,3 +1,6 @@
+{% load static %}
+
+{% load i18n %}
 <footer class="site-footer">
 
     <div class="container">
@@ -5,13 +8,13 @@
         <div class="row">
 
             <div class="col-6 col-md-5 mb-6 mb-md-0">
-                <h3>Details</h3>
-                For any suggestions/queries please contact us through following details:  <br> Contact No.: 0120-687903/778965 <br> Email ID: abc@uni.edu
+                <h3>{% trans "Details" %}</h3>
+                {% trans "For any suggestions/queries please contact us through following details:  " %}<br>{% trans "Contact No." %} : 0120-687903/778965 <br> Email ID: abc@uni.edu
             </div>
 
 
             <div class="col-6 col-md-4 mb-5 mb-md-0">
-                <h3>Useful Links</h3>
+                <h3>{% trans "Useful Links" %}</h3>
                 <ul>
                     <li><a href="http://nptel.ac.in/">NPTEL</a></li>
                     <li><a href="https://www.aicte-india.org/">AICTE</a></li>
@@ -21,7 +24,7 @@
             </div>
 
             <div class="col-6 col-md-2 mb-2 mb-md-0">
-                <h3>Other Links</h3>
+                <h3>{% trans "Other Links" %}</h3>
                 <ul>
                     <li><a href="http://nptel.ac.in/">NPTEL</a></li>
                     <li><a href="https://www.aicte-india.org/">AICTE</a></li>
