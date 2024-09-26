@@ -4,7 +4,6 @@ from .models import *
 admin.site.register(Campus)
 
 
-
 class ApplicantAdmin(admin.ModelAdmin):
     list_display = ('job', 'user', 'timestamp')
 
@@ -17,4 +16,3 @@ class JobAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Job, JobAdmin)
-

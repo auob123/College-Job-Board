@@ -30,7 +30,21 @@ msgstr ""
 
 #: .\Job\views.py:458 .\templates\Job\home.html:27
 msgid "Jobs Listed"
-msgstr "все"
+msgstr "Список вакансий"
+msgid "Web developer"
+msgstr "Веб-разработчик"
+msgid "DSA Mentor"
+msgstr "Ментор DSA"
+
+msgid "Back-end Intern"
+msgstr "Стажер на серверной стороне"
+
+msgid "Research associate"
+msgstr "Научный сотрудник"
+
+msgid "Teaching Assistant"
+msgstr "Ассистент преподавателя"
+
 msgid "Register"
 msgstr "Зарегистрироваться"
 msgid "Log In"

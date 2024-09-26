@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
+from django.utils.translation import gettext as _ 
 
 User = get_user_model()
 
@@ -60,3 +61,8 @@ class BookmarkJob(models.Model):
 
     def __str__(self):
         return self.job.title
+
+
+   # Function to return a list of prerequisite course names
+    def get_prereqs(self):
+        return list(self.prerequisites.names())

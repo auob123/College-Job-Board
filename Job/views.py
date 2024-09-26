@@ -458,6 +458,15 @@ def job_edit(request, id=id):
 #mark the strings that need translation
 def home(request):
     message = _("Jobs Listed")  # Marking text for translation
+    message = _("Jobs Listed")
+    message = _("Next")
+    message = _("Prev")
+    message = _("Web developer")
+    message = _("DSA Mentor")
+    message = _("Back-end Intern")
+    message = _("Research associate")
+    message = _("Teaching Assistant")
+ 
     return render(request, 'home.html', {'message': message})
 
 
@@ -467,7 +476,8 @@ def base(request):
     message = _("Log In")
     message = _("Faculty")
     message = _("Student")
-    message = _("Switch")
+
+    
     return render(request, 'base.html', {'message': message})
 
 def footer(request):

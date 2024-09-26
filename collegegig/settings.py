@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'taggit',
     'lang',
+    'modeltranslation',
     
 ]
 

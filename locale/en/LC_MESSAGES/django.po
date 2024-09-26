@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-21 02:43+0500\n"
+"POT-Creation-Date: 2024-09-26 16:40+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,52 +18,107 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\Job\urls.py:59 .\collegegig\urls.py:28
-msgid "home/"
-msgstr ""
+#: .\Job\views.py:460 .\templates\Job\home.html:28
 
+
+#: .\Job\views.py:466 .\templates\base.html:80
 msgid "Register"
 msgstr "Register"
+msgid "Web developer"
+msgstr "Web developer"
+msgid "DSA Mentor"
+msgstr "DSA Mentor"
+msgid "Back-end Intern"
+msgstr "Back-end Intern"
+msgid "Research associate"
+msgstr "Research associate"
+msgid "Teaching Assistant"
+msgstr "Teaching Assistant"
+
+	
+
+#: .\Job\views.py:467 .\templates\base.html:91
 msgid "Log In"
 msgstr "Log In"
+
+#: .\Job\views.py:468 .\templates\base.html:82
 msgid "Faculty"
 msgstr "Faculty"
+
+#: .\Job\views.py:469 .\templates\base.html:83
 msgid "Student"
 msgstr "Student"
-msgid "Details"
-msgstr "Details"
-msgid "For any suggestions/queries please contact us through following details:  "
-msgstr "For any suggestions/queries please contact us through following details:  "
-msgid "Contact No."
-msgstr "Contact No."
-msgid "Useful Links"
-msgstr "Useful Links"
-msgid "Other Links"
-msgstr "Other Links"
-msgid "Select Campus"
-msgstr "Select Campus"
-msgid "Full Time"
-msgstr "Full Time"
-msgid "Part Time"
-msgstr "Part Time"
-msgid "Internship"
-msgstr "Internship"
-msgid "Mentoring"
-msgstr "Mentoring"
-msgid "Search Job"
-msgstr "Search Job"
+
+#: .\Job\views.py:470 .\templates\base.html:107
 msgid "Switch"
 msgstr "Switch"
+
+#: .\Job\views.py:474 .\templates\footer.html:11
+msgid "Details"
+msgstr "Details"
+
+#: .\Job\views.py:475 .\templates\footer.html:12
+msgid ""
+"For any suggestions/queries please contact us through following details:  "
+msgstr ""
+"For any suggestions/queries please contact us through following details:  "
+
+#: .\Job\views.py:476 .\templates\footer.html:12
+msgid "Contact No."
+msgstr "Contact No."
+
+#: .\Job\views.py:477 .\templates\footer.html:17
+msgid "Useful Links"
+msgstr "Useful Links"
+
+#: .\Job\views.py:478 .\templates\footer.html:27
+msgid "Other Links"
+msgstr "Other Links"
+
+#: .\Job\views.py:483 .\templates\Job\search.html:12
+#: .\templates\Job\search.html:22
+msgid "Select Campus"
+msgstr "Select Campus"
+
+#: .\Job\views.py:484 .\templates\Job\search.html:23
+msgid "Full Time"
+msgstr "Full Time"
+
+#: .\Job\views.py:485 .\templates\Job\search.html:24
+msgid "Part Time"
+msgstr "Part Time"
+
+#: .\Job\views.py:486 .\templates\Job\search.html:25
+msgid "Internship"
+msgstr "Internship"
+
+#: .\Job\views.py:487 .\templates\Job\search.html:26
+msgid "Mentoring"
+msgstr "Mentoring"
+
+#: .\Job\views.py:488 .\templates\Job\search.html:31
+msgid "Search Job"
+msgstr "Search Job"
+
+#: .\Job\views.py:489 .\templates\Job\search.html:7
 msgid "Search for the job"
 msgstr "Search for the job"
 
-#: .\Job\urls.py:60 .\collegegig\urls.py:29
-msgid "about/"
+#: .\collegegig\settings.py:140
+msgid "English"
 msgstr ""
 
-#: .\Job\views.py:458 .\templates\Job\home.html:27
-msgid "Jobs Listed"
-msgstr "Список вакансий"
+#: .\collegegig\settings.py:141
+msgid "Arabic"
+msgstr ""
+
+#: .\collegegig\settings.py:142
+msgid "Russian"
+msgstr ""
+
+#: .\collegegig\urls.py:30
+msgid "job/"
+msgstr ""
 
 #: .\env\lib\python3.8\site-packages\ckeditor_uploader\forms.py:6
 msgid "Search files"

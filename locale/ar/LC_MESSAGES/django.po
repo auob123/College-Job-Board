@@ -59,6 +59,22 @@ msgid "Switch"
 msgstr "التبديل"
 msgid "Search for the job"
 msgstr "ابحث عن الوظيفة"
+msgid "Web developer"
+msgstr "مبرمج ويب"
+msgid "DSA Mentor"
+msgstr "مدرب DSA"
+
+msgid "Back-end Intern"
+msgstr "متدرب في البرمجة الخلفية"
+
+msgid "Research associate"
+msgstr "مساعد باحث"
+
+msgid "Teaching Assistant"
+msgstr "مساعد تدريس"
+msgid "Prev"
+msgstr "السابق"
+
 
 
 #: .\Job\urls.py:60 .\collegegig\urls.py:29

@@ -6,8 +6,6 @@ from collegegig.settings import MEDIA_ROOT
 from taggit.forms import TagWidget
 
 
-
-
 class JobForm(forms.ModelForm):
     """
       The job is poted on the Job only after moderator's approval.
